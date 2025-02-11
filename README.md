@@ -23,10 +23,10 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)--> 
 
 ## Description
-
+```bash
 This project is a secure authentication and file management system built with NestJS as the backend framework and PostgreSQL as the database. The system provides role-based authentication for both admin and user accounts. Users can sign up, log in, and upload files, while admins have the authority to manage users and uploaded files.
 
-Features
+# Features
 Authentication & Authorization
 User & Admin Login: Secure authentication using JWT and role-based access control.
 Signup & Validation: User registration with email/password authentication and validation checks.
@@ -38,19 +38,20 @@ Admin Controls: Admin can view, delete, or manage uploaded files.
 Database (PostgreSQL)
 Stores user credentials, uploaded file metadata, and role-based access permissions.
 Ensures data consistency, security, and scalability.
-Tech Stack
+# Tech Stack
 Backend: NestJS (TypeScript, JWT authentication, file handling with Multer)
 Database: PostgreSQL
 ORM: TypeORM/Prisma
 Validation: Class-validator for request validation
 File Storage: Local storage or integration with cloud services (AWS S3, Supabase Storage, etc.)
-Use Cases
+# Use Cases
 A user signs up and logs in to access their dashboard.
 The user uploads a file, which is stored securely in the system.
 Admins can view and manage all uploaded files and user details.
 Users can download or delete their own files.
 Security features like JWT authentication and role-based permissions ensure data privacy and access control.
 
+```
 ## Project setup
 
 ```bash
