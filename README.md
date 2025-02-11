@@ -131,7 +131,7 @@ Invalid username or password
   - `file` (binary)  
 
 **Example Request (cURL):**  
-``` bash
+``` http
 curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"  
 ```
 
@@ -150,7 +150,7 @@ curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"
 - **Request Type:** `Query Parameter`  
 - **Example Request:**  
 
-``` bash
+``` http
 curl -X GET "http://localhost:3000/files/status?filename=document.pdf"
 ```
 
