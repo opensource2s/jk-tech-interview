@@ -9,6 +9,17 @@ import { User } from './users/users.model';
 
 @Module({
   imports: [
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: 'localhost',
+    //   port: 5432,
+    //   username: 'postgres',
+    //   password: 'qwert@123',
+    //   entities: [User],
+    //   database: 'myApp',
+    //   synchronize: true,
+    //   logging: true
+    // }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
