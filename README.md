@@ -102,7 +102,50 @@ Response :
 ```bash
 
 ```
+### **Upload File**  
+- **Endpoint:** `POST /files/upload`  
+- **Request Type:** `multipart/form-data`  
+- **Body:**  
+  - `file` (binary)  
 
+**Example Request (cURL):**  
+\`\`\`sh  
+curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"  
+\`\`\`
+
+**Response:**  
+\`\`\`json  
+{
+  "message": "File uploaded successfully",
+  "status": "success"
+}
+\`\`\`
+
+---
+
+### **Get Upload Status**  
+- **Endpoint:** `GET /files/status?filename=<filename>`  
+- **Request Type:** `Query Parameter`  
+- **Example Request:**  
+\`\`\`sh  
+curl -X GET "http://localhost:3000/files/status?filename=document.pdf"
+\`\`\`
+
+**Response (If file exists):**  
+\`\`\`json  
+{
+  "filename": "document.pdf",
+  "status": "success"
+}
+\`\`\`
+
+**Response (If file not found):**  
+\`\`\`json  
+{
+  "filename": "document.pdf",
+  "status": "failed"
+}
+\`\`\`
 ## Deployment
 
 
