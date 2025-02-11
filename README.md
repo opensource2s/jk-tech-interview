@@ -102,7 +102,29 @@ Response :
 ```bash
 
 ```
-### **Upload File**  
+
+### **2. User Login**  
+#### **Endpoint:**  
+```http
+POST /login
+```
+Request Body :
+```bash
+{
+  "username": "johndoe",
+  "password": "securePassword123"
+}
+```
+**Response (If success):** 
+```bash
+login successful
+```
+**Response (If given wrong username/password):**
+``` bash
+Invalid username or password
+```
+
+### **3. Upload File**  
 - **Endpoint:** `POST /files/upload`  
 - **Request Type:** `multipart/form-data`  
 - **Body:**  
