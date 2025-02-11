@@ -1,6 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto, UserLoginDto } from './users.model';
+import { CreateUserDto, UpdateUserDto, UserLoginDto, UploadFileDto, UploadStatus } from './users.model';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Multer } from 'multer';
 
 @Controller('users')
 export class UsersController {
@@ -45,5 +47,18 @@ export class UsersController {
     @Delete(':id')
     async remove(@Param('id') id: string) {
         return await this.userService.deleteUser(id);
-  }
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file'))
+    async uploadFile(@UploadedFile() file: Express.Multer.File, @Body() uploadFileDto: UploadFileDto ) {
+        if(!file) {
+            return {
+                message: 'File upload failed',
+                filename: uploadFileDto.filename || 'N/A',
+                uploadStatus: UploadStatus.FAILED
+            }
+        }
+        return await this.userService.uploadFile(file);
+    }
 }

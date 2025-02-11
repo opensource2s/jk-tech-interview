@@ -6,6 +6,8 @@ import { AdminModule } from './admin/admin.module';
 import { AdminController } from './admin/admin.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/users.model';
+import { FileController } from './file/file.controller';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -31,8 +33,8 @@ import { User } from './users/users.model';
       synchronize: true,
       logging: true
     }),
-    AdminModule, UsersModule],
-    controllers: [AppController, AdminController],
+    AdminModule, UsersModule, FileModule],
+    controllers: [AppController, AdminController, FileController],
     providers: [AppService],
 })
 export class AppModule {}

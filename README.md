@@ -86,7 +86,7 @@ $ npm run test
 ### **1. User Registration**  
 #### **Endpoint:**  
 ```http
-POST /auth/register
+POST /createUser
 ```
 Request Body :
 ```bash
@@ -97,6 +97,10 @@ Request Body :
   "phoneNumber": "+1234567890",
   "email": "johndoe@example.com"
 }
+```
+Response :
+```bash
+
 ```
 
 ## Deployment

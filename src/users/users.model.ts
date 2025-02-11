@@ -1,6 +1,13 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsPhoneNumber, IsString, Length, Matches, Max, Min } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsPhoneNumber, IsString, Length, Matches, Max, Min, IsEnum, IsOptional } from "class-validator";
 import { Column, CreateDateColumn, Entity, Int32, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
+import { UploadedFile } from "@nestjs/common";
+
+export enum UploadStatus {
+    SUCCESS = 'success',
+    FAILED = 'failed',
+    PENDING = 'pending',
+  }
 
 @Entity()
 export class User {
@@ -28,6 +35,24 @@ export class User {
 
     @CreateDateColumn()
     createdAt : Date
+
+    @Column()
+    files: Object
+}
+
+@Entity('uploads')
+export class UploadFile {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  filename: string;
+
+  @Column({ type: 'bytea', nullable: true }) // For storing file data
+  file?: Buffer;
+
+  @Column({ type: 'enum', enum: UploadStatus, default: UploadStatus.PENDING })
+  uploadStatus: UploadStatus;
 }
 
 export class CreateUserDto {
@@ -114,3 +139,27 @@ export class UserLoginDto {
     password?: string
 
 }
+
+export class UploadFileDto {
+    @ApiProperty({ description: 'File name', example: 'document.pdf' })
+    @IsString()
+    @IsNotEmpty()
+    filename: string;
+  
+    @ApiProperty({
+      description: 'File data as a buffer (only used if storing in DB)',
+      type: 'string',
+      format: 'binary',
+    })
+    @IsOptional()
+    file?: Buffer;
+  
+    @ApiProperty({
+      description: 'Status of the upload',
+      example: UploadStatus.SUCCESS,
+      enum: UploadStatus,
+    })
+    @IsEnum(UploadStatus)
+    @IsOptional()
+    uploadStatus?: UploadStatus;
+  }
