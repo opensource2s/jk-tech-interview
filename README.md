@@ -145,7 +145,7 @@ curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"
 
 ---
 
-### **Get Upload Status**  
+### **4. Get Upload Status**  
 - **Endpoint:** `GET /files/status?filename=<filename>`  
 - **Request Type:** `Query Parameter`  
 - **Example Request:**  
