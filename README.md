@@ -125,13 +125,16 @@ Invalid username or password
 ```
 
 ### **3. Upload File**  
-- **Endpoint:** `POST /files/upload`  
+#### **Endpoint:**  
+```http
+POST /files/upload
+```  
 - **Request Type:** `multipart/form-data`  
 - **Body:**  
   - `file` (binary)  
 
 **Example Request (cURL):**  
-``` http
+``` bash
 curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"  
 ```
 
@@ -146,11 +149,14 @@ curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"
 ---
 
 ### **4. Get Upload Status**  
-- **Endpoint:** `GET /files/status?filename=<filename>`  
+#### **Endpoint:**  
+```http
+GET /files/status?filename=<filename>
+```
 - **Request Type:** `Query Parameter`  
 - **Example Request:**  
 
-``` http
+``` bash
 curl -X GET "http://localhost:3000/files/status?filename=document.pdf"
 ```
 
