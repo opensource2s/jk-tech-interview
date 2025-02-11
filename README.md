@@ -23,7 +23,7 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)--> 
 
 ## Description
-echo "# AuthFileHub  
+ 
 This project is a secure authentication and file management system built with **NestJS** as the backend framework and **PostgreSQL** as the database. The system provides role-based authentication for both **admin** and **user** accounts. Users can **sign up, log in, and upload files**, while admins have the authority to manage users and uploaded files.
 
 ## Features
@@ -50,20 +50,12 @@ This project is a secure authentication and file management system built with **
 
 ## Setup
 1. Clone the repository:
-   \`\`\`sh
+   \`\`\`
    git clone <repository-url>
    \`\`\`
 2. Install dependencies:
-   \`\`\`sh
+   \`\`\`
    npm install
-   \`\`\`
-3. Build the project 
-    \`\`\`sh
-   npm run build
-   \`\`\`
-4. Run the project:
-   \`\`\`sh
-   npm run start
    \`\`\`
 
 ## Compile and run the project
@@ -88,6 +80,23 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
+```
+## API Endpoints  
+
+### **1. User Registration**  
+#### **Endpoint:**  
+```http
+POST /auth/register
+```
+Request Body :
+```bash
+{
+  "fullName": "John Doe",
+  "username": "johndoe",
+  "password": "securePassword123",
+  "phoneNumber": "+1234567890",
+  "email": "johndoe@example.com"
+}
 ```
 
 ## Deployment
