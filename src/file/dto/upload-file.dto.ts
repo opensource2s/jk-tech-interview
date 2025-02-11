@@ -14,14 +14,6 @@ export class UploadFileDto {
   filename: string;
 
   @ApiProperty({
-    description: 'File data as a buffer (only used if storing in DB)',
-    type: 'string',
-    format: 'binary',
-  })
-  @IsOptional()
-  file?: Buffer;
-
-  @ApiProperty({
     description: 'Status of the upload',
     example: UploadStatus.SUCCESS,
     enum: UploadStatus,

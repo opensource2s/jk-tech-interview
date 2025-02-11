@@ -1,25 +1,25 @@
-import { Controller,Post, UploadedFile, UseInterceptors, Body } from '@nestjs/common';
+import { Controller,Post,Get, Body, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { FileService } from './file.service';
 import { UploadFileDto, UploadStatus } from './dto/upload-file.dto';
 
 @Controller('file')
 export class FileController {
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() body: UploadFileDto) {
-    if (!file) {
-      return {
-        message: 'File upload failed',
-        filename: body.filename || 'N/A',
-        uploadStatus: UploadStatus.FAILED,
-      };
-    }
+    constructor(private readonly fileService: FileService) {}
 
-    return {
-      message: 'File uploaded successfully',
-      filename: file.originalname,
-      size: file.size,
-      uploadStatus: UploadStatus.SUCCESS,
-    };
-  }
+    // Endpoint to upload a file
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file'))
+    async uploadFile(@UploadedFile() file: Express.Multer.File) {
+      if (!file) {
+        return { message: 'File upload failed', status: 'failed' };
+      }
+      return this.fileService.uploadFile(file.originalname);
+    }
+  
+    // Endpoint to check file upload status
+    @Get('status')
+    async getUploadStatus(@Query('filename') filename: string) {
+      return this.fileService.getUploadStatus(filename);
+    }
 }
