@@ -109,17 +109,17 @@ Response :
   - `file` (binary)  
 
 **Example Request (cURL):**  
-\`\`\`sh  
+``` bash
 curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"  
-\`\`\`
+```
 
 **Response:**  
-\`\`\`json  
+ ``` bash
 {
   "message": "File uploaded successfully",
   "status": "success"
 }
-\`\`\`
+```
 
 ---
 
@@ -127,25 +127,26 @@ curl -X POST http://localhost:3000/files/upload -F "file=@/path/to/file.pdf"
 - **Endpoint:** `GET /files/status?filename=<filename>`  
 - **Request Type:** `Query Parameter`  
 - **Example Request:**  
-\`\`\`sh  
+
+``` bash
 curl -X GET "http://localhost:3000/files/status?filename=document.pdf"
-\`\`\`
+```
 
 **Response (If file exists):**  
-\`\`\`json  
+``` bash  
 {
   "filename": "document.pdf",
   "status": "success"
 }
-\`\`\`
+```
 
 **Response (If file not found):**  
-\`\`\`json  
+``` bash  
 {
   "filename": "document.pdf",
   "status": "failed"
 }
-\`\`\`
+```
 ## Deployment
 
 
