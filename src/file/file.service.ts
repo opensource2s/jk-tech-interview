@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UploadFile } from './entities/upload-file.entity';
-import { UploadStatus } from './dto/upload-file.dto';
+import { UploadFile, UploadStatus } from './file.model';
+
 @Injectable()
 export class FileService {
     constructor(

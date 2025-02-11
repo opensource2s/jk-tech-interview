@@ -5,7 +5,6 @@ import { User } from './users.model';
 import { CreateUserDto, UpdateUserDto } from './users.model';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { Multer } from 'multer';
 
 @Injectable()
 export class UsersService {
@@ -82,12 +81,5 @@ export class UsersService {
     await this.userRepository.remove(user);
   }
 
-  async uploadFile(file: Express.Multer.File) {
-    return {
-      originalname: file.originalname,
-      filename: file.filename,
-      size: file.size,
-      mimetype: file.mimetype,
-    }
-  }
+
 }

@@ -1,7 +1,7 @@
 import { Controller,Post,Get, Body, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from './file.service';
-import { UploadFileDto, UploadStatus } from './dto/upload-file.dto';
+import { UploadFileDto, UploadStatus } from './file.model';
 
 @Controller('file')
 export class FileController {
@@ -10,7 +10,7 @@ export class FileController {
     // Endpoint to upload a file
     @Post('upload')
     @UseInterceptors(FileInterceptor('file'))
-    async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    async uploadFile(@UploadedFile() file: Express.Multer.File, @Body() uploadFileDto: UploadFileDto) {
       if (!file) {
         return { message: 'File upload failed', status: 'failed' };
       }

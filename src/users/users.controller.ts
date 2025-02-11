@@ -48,17 +48,6 @@ export class UsersController {
     async remove(@Param('id') id: string) {
         return await this.userService.deleteUser(id);
     }
-
-    @Post('upload')
-    @UseInterceptors(FileInterceptor('file'))
-    async uploadFile(@UploadedFile() file: Express.Multer.File, @Body() uploadFileDto: UploadFileDto ) {
-        if(!file) {
-            return {
-                message: 'File upload failed',
-                filename: uploadFileDto.filename || 'N/A',
-                uploadStatus: UploadStatus.FAILED
-            }
-        }
-        return await this.userService.uploadFile(file);
-    }
 }
+
+

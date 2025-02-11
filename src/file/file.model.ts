@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsString, IsOptional, IsEnum } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum UploadStatus {
   SUCCESS = 'success',
@@ -21,4 +22,17 @@ export class UploadFileDto {
   @IsEnum(UploadStatus)
   @IsOptional()
   uploadStatus?: UploadStatus;
+}
+
+
+@Entity('uploads')
+export class UploadFile {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  filename: string;
+
+  @Column({ type: 'enum', enum: UploadStatus, default: UploadStatus.PENDING })
+  uploadStatus: UploadStatus;
 }
