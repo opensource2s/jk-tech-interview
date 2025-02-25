@@ -15,8 +15,14 @@ export class UsersService {
     ) {}
 
   async createUser(createUserDto: CreateUserDto) {
-    const user = this.userRepository.create(createUserDto);
-    return await this.userRepository.save(user);
+    try {
+      const user = this.userRepository.create(createUserDto);
+      return await this.userRepository.save(user);
+    } catch(error) {
+      console.log(error);
+      throw error;
+    }
+    
   }
 
   async validateUser(username, password) {
@@ -80,6 +86,4 @@ export class UsersService {
     const user = await this.getUser(id); 
     await this.userRepository.remove(user);
   }
-
-
 }
