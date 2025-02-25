@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsPhoneNumber, IsString, Length, Matches, Max, Min, IsEnum, IsOptional } from "class-validator";
 import { Column, CreateDateColumn, Entity, Int32, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
-import { UploadedFile } from "@nestjs/common";
+import { Optional, UploadedFile } from "@nestjs/common";
 
 export enum UploadStatus {
     SUCCESS = 'success',
@@ -30,15 +30,17 @@ export class User {
     @Column({type: "varchar", length: 10, unique: true})
     phone: string
 
-    @Column({type: "number"})
-    age: Int32
+    @Column({ type: 'int' })
+    age: number
 
     @CreateDateColumn()
     createdAt : Date
 
     @Column()
+    @Optional()
     files: Object
-}
+  }
+
 
 @Entity('uploads')
 export class UploadFile {
@@ -70,9 +72,14 @@ export class CreateUserDto {
     @IsString()
     userName: string
 
-    @ApiProperty({ example: 'qwert#123' })
+    @ApiProperty({ 
+      example: 'Qwert#123',
+      description: 'Password must be 8-15 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+    })
     @IsNotEmpty()
     @IsString()
+    @Length(8, 15)
+    @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/)
     password: string
 
     @ApiProperty({ example: 'qwert@gmail.com' })
@@ -94,6 +101,12 @@ export class CreateUserDto {
     @Min(18, { message: 'Age must be at least 18' }) // Minimum age validation
     @Max(100, { message: 'Age must be at most 100' })
     age: number
+
+    @ApiProperty()
+    createdAt : Date
+
+    @ApiProperty()
+    files : Object
 }
 
 export class UpdateUserDto {
