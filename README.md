@@ -398,3 +398,44 @@ The `uploadFile` function is an asynchronous method responsible for storing file
 ---
 
 This function plays a key role in file management by maintaining a record of uploaded files.  
+
+### Function Name: `getUploadStatus`  
+#### **Description:**  
+The `getUploadStatus` function is an asynchronous method responsible for retrieving the upload status of a file based on its filename. It queries the `uploadFileRepository` to find the corresponding file record. If a matching record is found, it returns the filename along with its stored upload status. If no record is found, it assumes the upload failed and returns a failure status.  
+
+---
+
+### **Function Workflow:**  
+1. **Search for the File Record:**  
+   - Calls `this.uploadFileRepository.findOne({ where: { filename } })` to check if a record exists for the provided filename.  
+
+2. **Handle Missing File Record:**  
+   - If no record is found, it returns `{ filename, status: UploadStatus.FAILED }` to indicate a failed upload.  
+
+3. **Return the Upload Status:**  
+   - If a record exists, it returns `{ filename: fileRecord.filename, status: fileRecord.uploadStatus }`.  
+
+---
+
+### **Parameters:**  
+- `filename: string` – The name of the file whose upload status is being retrieved.  
+
+**Request Format:**  
+```json
+{
+  "filename": "string",
+  "status": "UploadStatus"
+}
+```
+
+---
+
+### **Returns:**  
+- A `Promise<{ filename: string; status: UploadStatus }>` containing:  
+  - `filename: string` – The name of the requested file.  
+  - `status: UploadStatus` – The upload status of the file (`SUCCESS` or `FAILED`).  
+
+---
+
+This function is essential for tracking file upload statuses in a system that manages user-uploaded files.
+
