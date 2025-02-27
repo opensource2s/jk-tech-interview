@@ -470,3 +470,32 @@ The `getAdminByUsername` function is an asynchronous method that retrieves an ad
 ---
 
 This function is essential for admin authentication and permission management within an application.
+
+
+### **Function Name:** `validateAdmin`  
+#### **Description:**  
+The `validateAdmin` function is an asynchronous method responsible for verifying an admin's credentials during login. It retrieves the admin's record based on the provided username and checks whether the given password matches the stored hashed password. If the username or password is incorrect, it throws an appropriate exception.  
+
+---
+
+### **Function Workflow:**  
+1. **Retrieve Admin Record by Username:**  
+   - Calls `this.getAdminByUsername(username)` to fetch the admin's details.  
+   - If the admin does not exist, it throws a `NotFoundException` with the message `'User not found'`.  
+
+2. **Validate the Password:**  
+   - Uses `bcrypt.compare(password, admin.password)` to compare the provided password with the hashed password stored in the database.  
+   - If the password is incorrect, it throws an `UnauthorizedException` with the message `'Invalid password'`.  
+
+3. **Return the Admin Record:**  
+   - If both the username and password are valid, the function returns the admin object.  
+
+---
+
+### **Parameters:**  
+- `username: string` – The admin’s username.  
+- `password: string` – The password entered by the admin.  
+
+---
+
+This function ensures secure admin authentication and prevents unauthorized access.
