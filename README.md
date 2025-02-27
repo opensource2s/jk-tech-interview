@@ -177,12 +177,12 @@ curl -X GET "http://localhost:3000/files/status?filename=document.pdf"
 ```
 
 
-# createUser Function
+## createUser Function
 
-## Function Name: `createUser`  
+### Function Name: `createUser`  
 **Method:** POST  
 
-### Description  
+#### Description  
 The `createUser` function is an asynchronous method responsible for creating and saving a new user in the database using a repository pattern. It accepts a `CreateUserDto` object, which contains user-related data, and performs the following operations:
 
 1. **Creating a User Entity:**  
@@ -197,11 +197,11 @@ The `createUser` function is an asynchronous method responsible for creating and
    - If an error occurs (such as a database constraint violation or a connection issue), it is logged to the console.  
    - The error is then thrown to be handled by the calling function or the global error-handling mechanism.  
 
-### Parameters  
+#### Parameters  
 - **`createUserDto: CreateUserDto`** – An object that contains the necessary user details for creating a new user record in the database.  
   - This DTO (Data Transfer Object) is typically used to ensure that only the required and validated data is passed to the repository.  
 
-#### Example Request Object:
+##### Example Request Object:
 ```json
 {
   "id": "string",
@@ -215,10 +215,10 @@ The `createUser` function is an asynchronous method responsible for creating and
 }
 ```
 
-### Returns  
+#### Returns  
 - Returns the newly created and saved user entity.  
 
-### Possible Exceptions  
+#### Possible Exceptions  
 - **Database Constraint Violations:**  
   - If there are unique constraints (e.g., email, username) and a duplicate entry is attempted, an error is thrown.  
 - **Validation Errors:**  
