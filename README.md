@@ -356,7 +356,8 @@ Deletes a user record from the database based on the provided user ID.
 
 ### Function Name:  `uploadFile`
 
-## Method: Post
+**Method:** POST
 
-#### **Description:**  
+**Description:** 
+ 
 The `uploadFile` function is an asynchronous method responsible for storing file upload records in the database. It takes a filename as input, creates a new file record with an upload status, and saves it using the `uploadFileRepository`. If the operation is successful, it returns a success message and status. In case of an error, it returns a failure message and status without throwing an exception.  
