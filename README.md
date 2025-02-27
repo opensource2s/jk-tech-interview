@@ -225,3 +225,31 @@ The `createUser` function is an asynchronous method responsible for creating and
   - If `createUserDto` contains invalid or incomplete data, the database or validation layer might reject it.  
 - **Database Connection Issues:**  
   - If the database connection is lost or unavailable, the function will throw an error.  
+
+
+### Function Name: `validateUser`  
+**Description:**  
+The `validateUser` function is an asynchronous method responsible for verifying a user's credentials during the login process. It ensures that the provided username exists in the database and that the entered password matches the stored hashed password. If both checks pass, the function returns the authenticated user; otherwise, it throws appropriate exceptions.
+
+#### Function Workflow:
+1. **Retrieve the User by Username:**  
+   - Calls `getUserByUsername(username)` to fetch the user record from the database.  
+   - If no user is found, an exception is thrown (`NotFoundException`).  
+
+2. **Validate the Password:**  
+   - Uses `bcrypt.compare(password, user.password)` to compare the provided password with the hashed password stored in the database.  
+   - If the password does not match, an exception is thrown (`UnauthorizedException`).  
+
+3. **Return the Authenticated User:**  
+   - If both username and password are valid, the user object is returned.  
+
+#### Parameters:  
+- `username: string` – The username provided by the user during login.  
+- `password: string` – The plaintext password entered by the user.  
+
+#### Returns:  
+- A `Promise<User>` containing the authenticated user object if validation is successful.  
+
+#### Exceptions & Error Handling:  
+- **`NotFoundException('User not found')`** – Thrown if the username does not exist in the database.  
+- **`UnauthorizedException('Invalid password')`** – Thrown if the provided password does not match the stored hashed password. 
