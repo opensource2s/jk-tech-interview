@@ -175,3 +175,53 @@ curl -X GET "http://localhost:3000/files/status?filename=document.pdf"
   "status": "failed"
 }
 ```
+
+
+# createUser Function
+
+## Function Name: `createUser`  
+**Method:** POST  
+
+### Description  
+The `createUser` function is an asynchronous method responsible for creating and saving a new user in the database using a repository pattern. It accepts a `CreateUserDto` object, which contains user-related data, and performs the following operations:
+
+1. **Creating a User Entity:**  
+   - It utilizes the `create` method of `userRepository` to instantiate a new user entity.  
+
+2. **Saving the User to the Database:**  
+   - The newly created user entity is then passed to the `save` method of `userRepository`.  
+   - The `save` method persists the entity into the database and returns the saved entity.  
+
+3. **Error Handling:**  
+   - The function is wrapped in a `try-catch` block to handle any potential errors that may arise during the creation or saving process.  
+   - If an error occurs (such as a database constraint violation or a connection issue), it is logged to the console.  
+   - The error is then thrown to be handled by the calling function or the global error-handling mechanism.  
+
+### Parameters  
+- **`createUserDto: CreateUserDto`** – An object that contains the necessary user details for creating a new user record in the database.  
+  - This DTO (Data Transfer Object) is typically used to ensure that only the required and validated data is passed to the repository.  
+
+#### Example Request Object:
+```json
+{
+  "id": "string",
+  "fullName": "string",
+  "userName": "string",
+  "password": "string",
+  "email": "string",
+  "phone": "string",
+  "age": "number",
+  "createdAt": "Date"
+}
+```
+
+### Returns  
+- Returns the newly created and saved user entity.  
+
+### Possible Exceptions  
+- **Database Constraint Violations:**  
+  - If there are unique constraints (e.g., email, username) and a duplicate entry is attempted, an error is thrown.  
+- **Validation Errors:**  
+  - If `createUserDto` contains invalid or incomplete data, the database or validation layer might reject it.  
+- **Database Connection Issues:**  
+  - If the database connection is lost or unavailable, the function will throw an error.  

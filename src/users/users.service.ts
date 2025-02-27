@@ -22,7 +22,6 @@ export class UsersService {
       console.log(error);
       throw error;
     }
-    
   }
 
   async validateUser(username, password) {
