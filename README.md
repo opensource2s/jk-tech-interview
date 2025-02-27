@@ -359,5 +359,42 @@ Deletes a user record from the database based on the provided user ID.
 **Method:** POST
 
 **Description:** 
- 
+
 The `uploadFile` function is an asynchronous method responsible for storing file upload records in the database. It takes a filename as input, creates a new file record with an upload status, and saves it using the `uploadFileRepository`. If the operation is successful, it returns a success message and status. In case of an error, it returns a failure message and status without throwing an exception.  
+
+### **Function Workflow:**  
+1. **Create a File Record:**  
+   - Calls `this.uploadFileRepository.create({ filename, uploadStatus: UploadStatus.SUCCESS })` to create a new file record.  
+   - Sets the `uploadStatus` to `UploadStatus.SUCCESS` initially.  
+
+2. **Save the File Record in the Database:**  
+   - Calls `this.uploadFileRepository.save(fileRecord)` to persist the record.  
+
+3. **Return the Upload Status:**  
+   - If the file record is successfully stored, it returns `{ message: 'File uploaded successfully', status: UploadStatus.SUCCESS }`.  
+   - If an error occurs during the process, it catches the exception and returns `{ message: 'File upload failed', status: UploadStatus.FAILED }`.  
+
+---
+
+### **Parameters:**  
+- `filename: string` – The name of the uploaded file to be recorded in the database.  
+  
+**Request Format:**  
+```json
+{
+  "filename": "string",
+  "uploadedAt": "Date",
+  "uploadStatus": "string"
+}
+```
+
+---
+
+### **Returns:**  
+- A `Promise<{ message: string; status: UploadStatus }>` containing:  
+  - `message: string` – A success or failure message.  
+  - `status: UploadStatus` – Enum indicating whether the upload was successful or failed.  
+
+---
+
+This function plays a key role in file management by maintaining a record of uploaded files.  
