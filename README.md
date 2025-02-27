@@ -297,7 +297,9 @@ The `login` function is an asynchronous method responsible for authenticating a 
 This function ensures secure user authentication and token-based access control, making it a critical part of an authentication system.
 
 ### Function Name: `getUser`
+
 **Method:** POST  
+
 **Description:**  
 Retrieves a user record from the database based on the provided unique user ID. Throws a `NotFoundException` if no user is found.
 
@@ -311,4 +313,25 @@ Retrieves a user record from the database based on the provided unique user ID. 
 
 #### Returns:
 - A `Promise<User>` containing the user object if found.
+- Throws a `NotFoundException` if no user exists.
+
+
+### Function Name:`updateUser`
+
+**Method:** POST
+
+**Description:**  
+Updates an existing user's details using the provided user ID and update data.
+
+#### Workflow:
+1. Retrieves the user using `getUser(id)`.
+2. Merges new data into the existing user object.
+3. Saves the updated user in the database.
+
+#### Parameters:
+- `id: string` – Unique identifier of the user.
+- `updateUserDto: UpdateUserDto` – Object containing fields to update.
+
+#### Returns:
+- A `Promise<User>` containing the updated user object.
 - Throws a `NotFoundException` if no user exists.
