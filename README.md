@@ -253,3 +253,45 @@ The `validateUser` function is an asynchronous method responsible for verifying 
 #### Exceptions & Error Handling:  
 - **`NotFoundException('User not found')`** – Thrown if the username does not exist in the database.  
 - **`UnauthorizedException('Invalid password')`** – Thrown if the provided password does not match the stored hashed password. 
+
+
+### Function Name: `login` 
+
+**Method:** POST  
+
+#### Description:  
+The `login` function is an asynchronous method responsible for authenticating a user and generating a JSON Web Token (JWT) upon successful login. It first validates the user's credentials using the `validateUser` function and, if successful, creates and returns an access token for authentication in subsequent requests.  
+
+#### Function Workflow:  
+1. **Validate User Credentials:**  
+   - Calls the `validateUser(username, password)` function to check if the provided username and password are correct.  
+   - If the user does not exist or the password is incorrect, an `UnauthorizedException` is thrown.  
+
+2. **Generate JWT Token:**  
+   - Constructs a `payload` object containing:  
+     - `username`: The authenticated user's username.  
+     - `sub`: The unique user ID (`user.id`), commonly used as the subject (`sub`) claim in JWT.  
+   - Uses `this.jwtService.sign(payload)` to generate a JWT access token.  
+
+3. **Return Login Response:**  
+   - Returns an object containing:  
+     - A success message (`"Login successful"`).  
+     - The generated JWT access token (`access_token`).  
+
+#### Parameters:  
+- `username: string` – The username provided by the user for login.  
+- `password: string` – The plaintext password entered by the user.  
+
+##### Example Request Object:
+```json
+{
+  "userName": "string",
+  "password": "string"
+}
+```
+
+#### Returns:  
+- `message`: A success message indicating successful login.  
+- `access_token`: The generated JWT token used for authenticated API requests.  
+
+This function ensures secure user authentication and token-based access control, making it a critical part of an authentication system.
