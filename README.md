@@ -499,3 +499,40 @@ The `validateAdmin` function is an asynchronous method responsible for verifying
 ---
 
 This function ensures secure admin authentication and prevents unauthorized access.
+
+### **Function Name:** `login`  
+#### **Description:**  
+The `login` function is an asynchronous method that handles the authentication process for an admin. It verifies the provided username and password using the `validateAdmin` function. If the credentials are valid, it generates a JSON Web Token (JWT) for the admin, allowing them to access protected resources.  
+
+---
+
+### **Function Workflow:**  
+1. **Validate Admin Credentials:**  
+   - Calls `this.validateAdmin(username, password)` to check if the provided username and password are correct.  
+   - If validation fails, it throws an `UnauthorizedException` with the message `'Invalid username or password'`.  
+
+2. **Generate JWT Token:**  
+   - Creates a payload containing:  
+     - `username`: The admin’s username.  
+     - `sub`: The admin’s unique ID (`admin.id`).  
+   - Uses `this.jwtService.sign(payload)` to generate a JWT token.  
+
+3. **Return a Success Response:**  
+   - If authentication is successful, it returns an object containing:  
+     - `message: 'Login successful'`  
+     - `access_token`: The generated JWT token.  
+
+---
+
+### **Parameters:**  
+- `username: string` – The admin’s username.  
+- `password: string` – The admin’s password.  
+
+---
+
+### **Returns:**  
+- A `Promise<{ message: string; access_token: string }>` containing:  
+  - `message: string` – A success message.  
+  - `access_token: string` – A JWT token for authentication.  
+
+This function ensures secure and efficient authentication for admins, providing a JWT token for session management.
