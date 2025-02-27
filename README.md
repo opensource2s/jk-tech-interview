@@ -335,3 +335,21 @@ Updates an existing user's details using the provided user ID and update data.
 #### Returns:
 - A `Promise<User>` containing the updated user object.
 - Throws a `NotFoundException` if no user exists.
+
+### Function Name: `deleteUser`
+
+**Method:** POST
+ 
+**Description:**  
+Deletes a user record from the database based on the provided user ID.
+
+#### Workflow:
+1. Retrieves the user using `getUser(id)`.
+2. Deletes the user from the database.
+
+#### Parameters:
+- `id: string` – Unique identifier of the user.
+
+#### Returns:
+- A `Promise<void>` after successful deletion.
+- Throws a `NotFoundException` if no user exists.
