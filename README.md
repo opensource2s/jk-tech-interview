@@ -439,3 +439,34 @@ The `getUploadStatus` function is an asynchronous method responsible for retriev
 
 This function is essential for tracking file upload statuses in a system that manages user-uploaded files.
 
+
+### Function Name: `getAdminByUsername`  
+**Method: Post**
+**Description:**  
+The `getAdminByUsername` function is an asynchronous method that retrieves an admin user's details based on the provided username. It queries the `adminRepository` to find a matching admin record in the database. If a record exists, it returns the admin details; otherwise, it returns `Not found`.  
+
+---
+
+### **Function Workflow:**  
+1. **Search for the Admin Record:**  
+   - Calls `this.adminRepository.findOne({ where: { userName: username } })` to look up the admin in the database.  
+
+2. **Return the Admin Record:**  
+   - If the admin exists, it returns the admin object.  
+   - If no admin is found, it currently returns `null` (should ideally throw an exception).  
+
+---
+
+### **Parameters:**  
+- `username: string` – The username of the admin whose details are being retrieved.  
+
+---
+
+### **Returns:**  
+- A `Promise<Admin | null>` containing:  
+  - The admin object if found.  
+  - `null` if no admin exists with the given username.  
+
+---
+
+This function is essential for admin authentication and permission management within an application.
