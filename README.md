@@ -339,7 +339,7 @@ Updates an existing user's details using the provided user ID and update data.
 ### Function Name: `deleteUser`
 
 **Method:** POST
- 
+
 **Description:**  
 Deletes a user record from the database based on the provided user ID.
 
@@ -353,3 +353,10 @@ Deletes a user record from the database based on the provided user ID.
 #### Returns:
 - A `Promise<void>` after successful deletion.
 - Throws a `NotFoundException` if no user exists.
+
+### Function Name:  `uploadFile`
+
+## Method: Post
+
+#### **Description:**  
+The `uploadFile` function is an asynchronous method responsible for storing file upload records in the database. It takes a filename as input, creates a new file record with an upload status, and saves it using the `uploadFileRepository`. If the operation is successful, it returns a success message and status. In case of an error, it returns a failure message and status without throwing an exception.  
