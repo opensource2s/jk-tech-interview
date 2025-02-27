@@ -295,3 +295,20 @@ The `login` function is an asynchronous method responsible for authenticating a 
 - `access_token`: The generated JWT token used for authenticated API requests.  
 
 This function ensures secure user authentication and token-based access control, making it a critical part of an authentication system.
+
+### Function Name: `getUser`
+**Method:** POST  
+**Description:**  
+Retrieves a user record from the database based on the provided unique user ID. Throws a `NotFoundException` if no user is found.
+
+#### Workflow:
+1. Queries the database for the given user ID.
+2. Returns the user object if found.
+3. Throws `NotFoundException` if no user exists.
+
+#### Parameters:
+- `id: string` – Unique identifier of the user.
+
+#### Returns:
+- A `Promise<User>` containing the user object if found.
+- Throws a `NotFoundException` if no user exists.
